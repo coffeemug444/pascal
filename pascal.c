@@ -61,7 +61,7 @@ void print_most_common(char* hash_table) {
     // look through numbers 2 to 10,000 and check number of occurances
     // not too sure on the math maybe should check over 10,000?
     // this function is pretty quick so..
-    for (int i = 2; i < 10000; i++) {
+    for (int i = 2; i < 50000; i++) {
         add_lint(tmp, one);
         unsigned int hash = hash_lint(tmp);
         if (hash_table[hash] >= count) {
@@ -155,7 +155,7 @@ int main(int argc, char *argv[]) {
     // set up rows
     LINT** row = malloc(size * sizeof(LINT*));;
     LINT** tmp_row;
-    LINT** previous_row = malloc(size * sizeof(LINT*));
+    LINT** previous_row = malloc(sizeof(LINT*));
     previous_row[0] = new_lint_str("1");
     if (print) {
         printf("1,\n");
@@ -176,6 +176,8 @@ int main(int argc, char *argv[]) {
 
     // for each new row
     for (int i = 2; i < size + 1; i++) {
+
+        row = malloc(i * sizeof(LINT*));
 
         context.row = row;
         context.previous_row = previous_row;
@@ -223,12 +225,10 @@ int main(int argc, char *argv[]) {
         }
 
         // set up rows for next line
-        tmp_row = previous_row;
+        free_row(previous_row, i - 1);
         previous_row = row;
-        row = tmp_row;
     }
     free_row(previous_row, size);
-    free_row(row, size);
 
     print_most_common(hash_table);
     
