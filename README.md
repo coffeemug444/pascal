@@ -6,3 +6,5 @@ This should compile fine on both Linux and Windows (with MinGW), just run `make`
 Usage: ./main count print \[y/n\]
 
 count specifies how many rows of the triangle to compute, 'y' or 'n' specificies whether to print out the triangle
+
+uses the [longer-int](https://github.com/vlad-olteanu/longer-int) library
